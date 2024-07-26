@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Batalla</title>
+</head>
+<body>
+    <h1>Agregar Batalla</h1>
+    <!-- Bloque para mostrar mensajes flash -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form action="/add_batalla" method="POST">
+        <label for="entrenador1">Entrenador 1:</label>
+        <select id="entrenador1" name="entrenador1_id" required>
+            {% for entrenador in entrenadores %}
+                <option value="{{ entrenador.id }}">{{ entrenador.nombre }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="pokemon1">Pokémon 1:</label>
+        <select id="pokemon1" name="pokemon1_id" required>
+            {% for pokemon in pokemones %}
+                <option value="{{ pokemon.id }}">{{ pokemon.nombre }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="entrenador2">Entrenador 2:</label>
+        <select id="entrenador2" name="entrenador2_id" required>
+            {% for entrenador in entrenadores %}
+                <option value="{{ entrenador.id }}">{{ entrenador.nombre }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="pokemon2">Pokémon 2:</label>
+        <select id="pokemon2" name="pokemon2_id" required>
+            {% for pokemon in pokemones %}
+                <option value="{{ pokemon.id }}">{{ pokemon.nombre }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required><br>
+        <label for="resultado">Resultado:</label>
+        <input type="text" id="resultado" name="resultado" required><br>
+        <input type="submit" value="Guardar">
+        <a href="/" >Volver al Inicio</a>
+    </form>
+
+    <h2>Batallas Registradas</h2>
+    <table>
+        <tr>
+            <th>Entrenador 1</th>
+            <th>Pokémon 1</th>
+            <th>Entrenador 2</th>
+            <th>Pokémon 2</th>
+            <th>Fecha</th>
+            <th>Resultado</th>
+        </tr>
+        {% for batalla in batallas %}
+        <tr>
+            <td>{{ batalla.entrenador1.nombre }}</td>
+            <td>{{ batalla.pokemon1.nombre }}</td>
+            <td>{{ batalla.entrenador2.nombre }}</td>
+            <td>{{ batalla.pokemon2.nombre }}</td>
+            <td>{{ batalla.fecha.strftime('%Y-%m-%d') }}</td>
+            <td>{{ batalla.resultado }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

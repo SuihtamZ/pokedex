@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Entrenador</title>
+</head>
+<body>
+    <h1>Agregar Entrenador</h1>
+    <!-- Bloque para mostrar mensajes flash -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form action="/guardar_entrenador" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" required><br>
+        <label for="ciudad_origen">Ciudad Origen:</label>
+        <input type="text" id="ciudad_origen" name="ciudad_origen" required><br>
+        <label for="rango">Rango:</label>
+        <input type="text" id="rango" name="rango" required><br>
+        <input type="submit" value="Guardar">
+        <a href="/" >Volver al Inicio</a>
+    </form>
+    <h2>Entrenadores Agregados</h2>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Ciudad Origen</th>
+            <th>Rango</th>
+            <th>Acciones</th>
+        </tr>
+        {% for entrenador in entrenadores %}
+        <tr>
+            <td>{{ entrenador.nombre }}</td>
+            <td>{{ entrenador.edad }}</td>
+            <td>{{ entrenador.ciudad_origen }}</td>
+            <td>{{ entrenador.rango }}</td>
+            <td>
+                <a href="/editar_entrenador/{{ entrenador.id }}">Editar</a>
+                <form action="/borrar_entrenador/{{ entrenador.id }}" method="POST" style="display:inline;">
+                    <input type="submit" value="Borrar" onclick="return confirm('¿Estás seguro de que deseas borrar este Entrenador?');">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

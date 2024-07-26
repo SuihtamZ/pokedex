@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Entrenador</title>
+</head>
+<body>
+    <h1>Editar Entrenador</h1>
+    <!-- Bloque para mostrar mensajes flash -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form action="/editar_entrenador/{{ entrenador.id }}" method="POST">
+        <!-- Agrega aquí los campos del formulario para Pokémon -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="{{ entrenador.nombre }}" required><br>
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" value="{{ entrenador.edad }}" required><br>
+        <label for="ciudad_origen">Ciudad Origen:</label>
+        <input type="text" id="ciudad_origen" name="ciudad_origen" value="{{ entrenador.ciudad_origen }}" required><br>
+        <label for="rango">Rango:</label>
+        <input type="text" id="rango" name="rango" value="{{ entrenador.rango }}" required><br>
+        <input type="submit" value="Guardar">
+        <a href="/entrenador" >Volver a la lista</a>
+    </form>
+</body>
+</html>

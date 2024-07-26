@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Relación Entrenador-Pokémon</title>
+</head>
+<body>
+    <h1>Agregar Relación Entrenador-Pokémon</h1>
+    <!-- Bloque para mostrar mensajes flash -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form action="/guardar_relacion" method="POST">
+        <label for="entrenador">Entrenador:</label>
+        <select id="entrenador" name="entrenador_id" required>
+            {% for entrenador in entrenadores %}
+                <option value="{{ entrenador.id }}">{{ entrenador.nombre }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="pokemon">Pokémon:</label>
+        <select id="pokemon" name="pokemon_id" required>
+            {% for pokemon in pokemones %}
+                <option value="{{ pokemon.id }}">{{ pokemon.nombre }}</option>
+            {% endfor %}
+        </select><br>
+        <input type="submit" value="Guardar">
+        <a href="/" >Volver al Inicio</a>
+    </form>
+
+    <h2>Relaciones Entrenador-Pokémon</h2>
+    <table>
+        <tr>
+            <th>Entrenador</th>
+            <th>Pokémon</th>
+            <th>Acciones</th>
+        </tr>
+        {% for relacion in relaciones %}
+        <tr>
+            <td>{{ relacion.entrenador.nombre }}</td>
+            <td>{{ relacion.pokemon.nombre }}</td>
+            <td>
+                <a href="/editar_relacion/{{ relacion.id }}">Editar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .button-container {
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Pokedex
+    </header>
+    <div class="button-container">
+        <a href="{{ url_for('add_pokemon') }}" class="button">Agregar Pokémon</a>
+        <a href="{{ url_for('add_entrenador') }}" class="button">Agregar Entrenador</a>
+        <a href="{{ url_for('add_relacion') }}" class="button">Relacionar Pokémon</a>
+        <a href="{{ url_for('add_batalla') }}" class="button">Agregar Batalla</a>
+    </div>
+</body>
+</html>
